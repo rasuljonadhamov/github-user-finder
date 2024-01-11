@@ -7,15 +7,14 @@ interface ProfileCardProps {
   bio: string;
 }
 
-const ProfileCard = ({ user }) => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+const ProfileCard = ({ user, isDarkMode }) => {
   console.log(user);
 
   const { name, followers, following, bio }: ProfileCardProps = user;
 
   return (
     <div
-      className={`  p-4 ${
+      className={`w-2/3 mx-auto  p-4 ${
         isDarkMode
           ? "dark:bg-gray-800 dark:text-white"
           : "bg-white text-gray-700"
@@ -25,10 +24,6 @@ const ProfileCard = ({ user }) => {
       <p className="text-sm">Followers: {followers}</p>
       <p className="text-xs">Following: {following}</p>
       <h1 className="text-xs">{bio}</h1>
-
-      <button onClick={() => setIsDarkMode(!isDarkMode)}>
-        Toggle Dark Mode
-      </button>
     </div>
   );
 };
