@@ -1,3 +1,6 @@
+import { FaMoon } from "react-icons/fa";
+import { IoMdSunny } from "react-icons/io";
+
 const Header = ({ isDarkMode, setIsDarkMode }) => {
   const handleToggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
@@ -17,14 +20,18 @@ const Header = ({ isDarkMode, setIsDarkMode }) => {
         devfinder
       </h1>
       <button
-        className={`border rounded-md px-4 py-2 cursor-pointer ${
+        className={`flex items-center gap-2 border rounded-md px-4 py-2 cursor-pointer ${
           isDarkMode
             ? "bg-gray-700 text-white"
             : "bg-white text-gray-500 hover:bg-gray-100"
         }`}
         onClick={handleToggleDarkMode}
       >
-        {isDarkMode ? "Light Mode" : "Dark Mode"}
+        {isDarkMode ? (
+          <>Light Mode {<IoMdSunny />}</>
+        ) : (
+          <>Dark Mode {<FaMoon />}</>
+        )}
       </button>
     </header>
   );
