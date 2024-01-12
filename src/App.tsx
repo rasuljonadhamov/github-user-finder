@@ -6,7 +6,7 @@ import { useRef, useState } from "react";
 function App() {
   const [user, setUser] = useState("");
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const ref = useRef("");
+  const searchInputRef = useRef("");
 
   const fetchUserData = async (username: string) => {
     try {
@@ -29,6 +29,7 @@ function App() {
   function handleSearch(e) {
     if (e.current.value) {
       fetchUserData(e.current.value);
+      e.current.value = "";
     }
   }
 
@@ -41,13 +42,13 @@ function App() {
       <Header isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
       <div className="flex content-between w-2/3 mx-auto gap-20 mb-10">
         <input
-          ref={ref}
+          ref={searchInputRef}
           type="search"
           className="w-1/2 pl-3"
           placeholder="Search Github Username..."
         />
         <button
-          onClick={() => handleSearch(ref)}
+          onClick={() => handleSearch(searchInputRef)}
           type="submit"
           className="bg-indigo-600 text-gray-50 border-collapse px-4 py-2 right-0"
         >
@@ -58,7 +59,7 @@ function App() {
       {user ? (
         <ProfileCard user={user} isDarkMode={isDarkMode} />
       ) : (
-        <p className="text-center">Type To search user...</p>
+        <p className="text-center">Type to search for a user...</p>
       )}
     </div>
   );

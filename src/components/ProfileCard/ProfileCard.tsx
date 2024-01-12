@@ -1,4 +1,6 @@
 import React from "react";
+import Avatar from "../Avatar/Avatar";
+import UserStats from "../UserStats/UserStats";
 
 interface User {
   name: string;
@@ -12,12 +14,12 @@ interface User {
   twitter_username: string | null;
 }
 
-interface MainSectionProps {
+interface ProfileCardProps {
   user: User | null;
   isDarkMode: boolean;
 }
 
-const ProfileCard: React.FC<MainSectionProps> = ({ user, isDarkMode }) => {
+const ProfileCard: React.FC<ProfileCardProps> = ({ user, isDarkMode }) => {
   if (!user) return null;
 
   return (
@@ -26,55 +28,13 @@ const ProfileCard: React.FC<MainSectionProps> = ({ user, isDarkMode }) => {
         isDarkMode ? "dark:bg-gray-800" : "bg-white"
       }`}
     >
-      <div className="flex gap-14">
-        <img
-          src={user.avatar_url}
-          alt={user.login}
-          className={`w-48 h-48 rounded-full ring-2 ring-offset-2 ${
-            isDarkMode ? "ring-gray-700" : "ring-gray-200"
-          }`}
-        />
-        <div className="flex flex-col gap-2 items-start">
-          <p>{user.name}</p>
-          <p>{user.twitter_username || "N/A"} </p>
-          <p className={`text-gray-400 ${isDarkMode ? "text-gray-600" : ""}`}>
-            {user.bio || "This profile has no bio"}
-          </p>
-        </div>
-        <div className="created">
-          <p>Joined: {user.created_at || "N/A"}</p>
-        </div>
-      </div>
-      <ul className="flex mt-8 flex-row justify-between w-full text-gray-400 bg-gray-100 py-5 px-10">
-        <li>
-          <span className="font-semibold">Followers:</span>
-          <p className="text-2xl"> {user.followers || "Not followers"}</p>
-        </li>
-        <li>
-          <span className="font-semibold">Following:</span>{" "}
-          <p className="text-2xl">
-            {" "}
-            {user.following || "Not followed to someone"}
-          </p>
-        </li>
-        <li>
-          <span className="font-semibold">Repo:</span>{" "}
-          <p className="text-2xl">{user.public_repos || "N/A"}</p>
-        </li>
-        {user.twitter_username && (
-          <li>
-            <span className="font-semibold m-2">Twitter:</span>
-            <a
-              href={`https://twitter.com/${user.twitter_username}`}
-              className="underline hover:text-gray-700"
-            >
-              @{user.twitter_username}
-            </a>
-          </li>
-        )}
-      </ul>
+      <Avatar user={user} isDarkMode={isDarkMode} />
+      <UserStats user={user} isDarkMode={isDarkMode} />
     </section>
   );
 };
+
+
+
 
 export default ProfileCard;
