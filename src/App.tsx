@@ -40,17 +40,20 @@ function App() {
       }`}
     >
       <Header isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
-      <div className="flex content-between w-2/3 mx-auto gap-20 mb-10">
+      <div
+        className={`flex content-between w-2/3 mx-auto gap-20 mb-10 bg-slate-200
+      p-3 rounded-md ${isDarkMode ? "dark:bg-gray-800" : "bg-lightest"}`}
+      >
         <input
           ref={searchInputRef}
           type="search"
-          className="w-1/2 pl-3"
+          className="w-1/2 pl-3 rounded-lg"
           placeholder="Search Github Username..."
         />
         <button
           onClick={() => handleSearch(searchInputRef)}
           type="submit"
-          className="bg-indigo-600 text-gray-50 border-collapse px-4 py-2 right-0"
+          className="bg-indigo-600 rounded-md text-gray-50 border-collapse px-4 py-2 right-0"
         >
           Search
         </button>
