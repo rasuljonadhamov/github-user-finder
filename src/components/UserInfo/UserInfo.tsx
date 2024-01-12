@@ -18,7 +18,7 @@ interface ProfileCardProps {
 const UserInfo = ({ user, isDarkMode }: ProfileCardProps) => (
   <div className="flex flex-col gap-2 items-start">
     <h2>{user.name}</h2>
-    <p>{user.twitter_username || "N/A"}</p>
+    <p>@{user.twitter_username || "N/A"}</p>
     <p className={`text-gray-400 ${isDarkMode ? "text-gray-600" : ""}`}>
       {user.bio || "This profile has no bio"}
     </p>
