@@ -5,9 +5,10 @@ interface User {
   login: string;
   avatar_url: string;
   public_repos: number | null;
-  bio: string;
-  followers: number;
-  location: string | null;
+  created_at: number | null;
+  bio: string | null;
+  followers: number | null;
+  following: number | null;
   twitter_username: string | null;
 }
 
@@ -21,11 +22,11 @@ const ProfileCard: React.FC<MainSectionProps> = ({ user, isDarkMode }) => {
 
   return (
     <section
-      className={`main-section flex flex-col items-center gap-y-4 mx-auto px-4 py-8 ${
+      className={`main-section w-2/3 flex flex-col items-center gap-y-4 mx-auto px-4 py-8 ${
         isDarkMode ? "dark:bg-gray-800" : "bg-white"
       }`}
     >
-      <div className="flex gap-10">
+      <div className="flex gap-14">
         <img
           src={user.avatar_url}
           alt={user.login}
@@ -33,35 +34,36 @@ const ProfileCard: React.FC<MainSectionProps> = ({ user, isDarkMode }) => {
             isDarkMode ? "ring-gray-700" : "ring-gray-200"
           }`}
         />
-        <div className="flex flex-col items-center">
-          <h2
-            className={`text-3xl font-bold ${
-              isDarkMode ? "text-white" : "text-gray-800"
-            }`}
-          >
-            {user.login}
-          </h2>
+        <div className="flex flex-col gap-2 items-start">
           <p>{user.name}</p>
+          <p>{user.twitter_username || "N/A"} </p>
           <p className={`text-gray-400 ${isDarkMode ? "text-gray-600" : ""}`}>
-            {user.bio}
+            {user.bio || "This profile has no bio"}
           </p>
         </div>
+        <div className="created">
+          <p>Joined: {user.created_at || "N/A"}</p>
+        </div>
       </div>
-      <ul className="flex flex-row justify-between w-full text-gray-400">
+      <ul className="flex mt-8 flex-row justify-between w-full text-gray-400 bg-gray-100 py-5 px-10">
         <li>
-          <span className="font-semibold">Followers:</span> {user.followers}
+          <span className="font-semibold">Followers:</span>
+          <p className="text-2xl"> {user.followers || "Not followers"}</p>
         </li>
         <li>
-          <span className="font-semibold">Location:</span>{" "}
-          {user.location || "N/A"}
+          <span className="font-semibold">Following:</span>{" "}
+          <p className="text-2xl">
+            {" "}
+            {user.following || "Not followed to someone"}
+          </p>
         </li>
         <li>
           <span className="font-semibold">Repo:</span>{" "}
-          {user.public_repos || "N/A"}
+          <p className="text-2xl">{user.public_repos || "N/A"}</p>
         </li>
         {user.twitter_username && (
           <li>
-            <span className="font-semibold">Twitter:</span>
+            <span className="font-semibold m-2">Twitter:</span>
             <a
               href={`https://twitter.com/${user.twitter_username}`}
               className="underline hover:text-gray-700"

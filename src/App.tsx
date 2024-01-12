@@ -4,7 +4,7 @@ import ProfileCard from "./components/ProfileCard/ProfileCard";
 import { useRef, useState } from "react";
 
 function App() {
-  const [user, setUser] = useState("rasuljonadhamov");
+  const [user, setUser] = useState("");
   const [isDarkMode, setIsDarkMode] = useState(false);
   const ref = useRef("");
 
@@ -43,7 +43,7 @@ function App() {
         <input
           ref={ref}
           type="search"
-          className="w-1/2"
+          className="w-1/2 pl-3"
           placeholder="Search Github Username..."
         />
         <button
@@ -55,7 +55,11 @@ function App() {
         </button>
       </div>
 
-      {user && <ProfileCard user={user} isDarkMode={isDarkMode} />}
+      {user ? (
+        <ProfileCard user={user} isDarkMode={isDarkMode} />
+      ) : (
+        <p className="text-center">Type To search user...</p>
+      )}
     </div>
   );
 }
